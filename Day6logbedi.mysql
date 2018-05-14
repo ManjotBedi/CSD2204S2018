@@ -1,0 +1,869 @@
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| csd2204s18         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+MariaDB [(none)]> SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> USE CSD2204S18;
+Database changed
+MariaDB [CSD2204S18]> SHOW TABLES;
++----------------------+
+| Tables_in_csd2204s18 |
++----------------------+
+| c1                   |
+| c2                   |
+| c3                   |
+| customer             |
+| orders               |
+| persons              |
++----------------------+
+6 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer;
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.33 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY name ASC;
+ERROR 1054 (42S22): Unknown column 'name' in 'order clause'
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custName ASC;
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custName,city ASC;
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer LIMIT 3;
++--------+------------+----------+-----------+---------+------+
+| custID | custName   | nickName | city      | zipcode | age  |
++--------+------------+----------+-----------+---------+------+
+| CO1    | Ashley     | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp    | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley | BM       | Toronto   | 100100  |   25 |
++--------+------------+----------+-----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC;
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC LIMIT 3;
++--------+---------------+----------+----------+---------+------+
+| custID | custName      | nickName | city     | zipcode | age  |
++--------+---------------+----------+----------+---------+------+
+| CO9    | Tony Special  | Specie   | GTA      | 418921  |   31 |
+| CO8    | Ashko Charles | AK       | USA      | 421044  |   30 |
+| CO7    | Bobby Chako   | Chac     | New York | 320300  |   29 |
++--------+---------------+----------+----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC LIMIT 3 ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASC' at line 1
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID ASC LIMIT 3;
++--------+------------+----------+-----------+---------+------+
+| custID | custName   | nickName | city      | zipcode | age  |
++--------+------------+----------+-----------+---------+------+
+| CO1    | Ashley     | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp    | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley | BM       | Toronto   | 100100  |   25 |
++--------+------------+----------+-----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC LIMIT 3 ASC LIMIT 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASC LIMIT 3' at line 1
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC LIMIT 3(SELECT * FROM ASC LIMIT 3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(SELECT * FROM ASC LIMIT 3)' at line 1
+MariaDB [CSD2204S18]> SELECT * FROM (SELECT * FROM customer ORDER BY custID ASC LIMIT 3) customer ORDER BY custID DESC LIMIT 3;
++--------+------------+----------+-----------+---------+------+
+| custID | custName   | nickName | city      | zipcode | age  |
++--------+------------+----------+-----------+---------+------+
+| CO2    | Bob Marley | BM       | Toronto   | 100100  |   25 |
+| CO10   | Jack Sp    | Sparrow  | New Jersy | 102301  |   32 |
+| CO1    | Ashley     | Ash      | WDC       | 321200  |   34 |
++--------+------------+----------+-----------+---------+------+
+3 rows in set (0.03 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC LIMIT 3 ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASC' at line 1
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC;
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer LIMIT 3;
++--------+------------+----------+-----------+---------+------+
+| custID | custName   | nickName | city      | zipcode | age  |
++--------+------------+----------+-----------+---------+------+
+| CO1    | Ashley     | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp    | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley | BM       | Toronto   | 100100  |   25 |
++--------+------------+----------+-----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer ORDER BY custID DESC LIMIT 3;
++--------+---------------+----------+----------+---------+------+
+| custID | custName      | nickName | city     | zipcode | age  |
++--------+---------------+----------+----------+---------+------+
+| CO9    | Tony Special  | Specie   | GTA      | 418921  |   31 |
+| CO8    | Ashko Charles | AK       | USA      | 421044  |   30 |
+| CO7    | Bobby Chako   | Chac     | New York | 320300  |   29 |
++--------+---------------+----------+----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM (SELECT * FROM customer ORDER BY custID ASC LIMIT 3) customer ORDER BY custID DESC LIMIT 3;
++--------+------------+----------+-----------+---------+------+
+| custID | custName   | nickName | city      | zipcode | age  |
++--------+------------+----------+-----------+---------+------+
+| CO2    | Bob Marley | BM       | Toronto   | 100100  |   25 |
+| CO10   | Jack Sp    | Sparrow  | New Jersy | 102301  |   32 |
+| CO1    | Ashley     | Ash      | WDC       | 321200  |   34 |
++--------+------------+----------+-----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM (SELECT * FROM customer ORDER BY custID DESC LIMIT 3) customer ORDER BY custID DESC LIMIT 3;
++--------+---------------+----------+----------+---------+------+
+| custID | custName      | nickName | city     | zipcode | age  |
++--------+---------------+----------+----------+---------+------+
+| CO9    | Tony Special  | Specie   | GTA      | 418921  |   31 |
+| CO8    | Ashko Charles | AK       | USA      | 421044  |   30 |
+| CO7    | Bobby Chako   | Chac     | New York | 320300  |   29 |
++--------+---------------+----------+----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM (SELECT * FROM customer ORDER BY custID DESC LIMIT 3) customer ORDER BY custID ASC LIMIT 3;
++--------+---------------+----------+----------+---------+------+
+| custID | custName      | nickName | city     | zipcode | age  |
++--------+---------------+----------+----------+---------+------+
+| CO7    | Bobby Chako   | Chac     | New York | 320300  |   29 |
+| CO8    | Ashko Charles | AK       | USA      | 421044  |   30 |
+| CO9    | Tony Special  | Specie   | GTA      | 418921  |   31 |
++--------+---------------+----------+----------+---------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer GROUP BY CITY;
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
++--------+-----------------+----------+-----------+---------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT city FROM customer GROUP BY CITY;
++-----------+
+| city      |
++-----------+
+| Brazil    |
+| GTA       |
+| New Jersy |
+| New York  |
+| Toronto   |
+| USA       |
+| WDC       |
++-----------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT COUNT(city) "UNIQUE CITIES" FROM customer GROUP BY CITY;
++---------------+
+| UNIQUE CITIES |
++---------------+
+|             1 |
+|             1 |
+|             1 |
+|             2 |
+|             3 |
+|             1 |
+|             1 |
++---------------+
+7 rows in set (0.01 sec)
+
+MariaDB [CSD2204S18]> SELECT city, COUNT(city) "No. Of customers" FROM customer GROUP BY CITY;
++-----------+------------------+
+| city      | No. Of customers |
++-----------+------------------+
+| Brazil    |                1 |
+| GTA       |                1 |
+| New Jersy |                1 |
+| New York  |                2 |
+| Toronto   |                3 |
+| USA       |                1 |
+| WDC       |                1 |
++-----------+------------------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT DISTINCT FROM customer GROUP BY CITY;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM customer GROUP BY CITY' at line 1
+MariaDB [CSD2204S18]> SELECT DISTINCT City FROM customer GROUP BY CITY;
++-----------+
+| City      |
++-----------+
+| Brazil    |
+| GTA       |
+| New Jersy |
+| New York  |
+| Toronto   |
+| USA       |
+| WDC       |
++-----------+
+7 rows in set (0.02 sec)
+
+MariaDB [CSD2204S18]> SELECT DISTINCT(City) FROM customer GROUP BY CITY;
++-----------+
+| City      |
++-----------+
+| Brazil    |
+| GTA       |
+| New Jersy |
+| New York  |
+| Toronto   |
+| USA       |
+| WDC       |
++-----------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT city, COUNT(city) "No. Of customers" FROM customer WHERE city LIKE 'New%' GROUP BY CITY;
++-----------+------------------+
+| city      | No. Of customers |
++-----------+------------------+
+| New Jersy |                1 |
+| New York  |                2 |
++-----------+------------------+
+2 rows in set (0.02 sec)
+
+MariaDB [CSD2204S18]> SELECT city, COUNT(city) "No. Of customers" FROM customer WHERE city HAVING city LIKE 'New%';
+Empty set, 10 warnings (0.03 sec)
+
+MariaDB [CSD2204S18]> SELECT city, COUNT(city) "No. Of customers" FROM customer GROUP BY city HAVING city LIKE 'New%';
++-----------+------------------+
+| city      | No. Of customers |
++-----------+------------------+
+| New Jersy |                1 |
+| New York  |                2 |
++-----------+------------------+
+2 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT city, COUNT(city) "No. Of customers" FROM customer GROUP BY city HAVING city LIKE 'New%' OR city= 'TORONTO'; 
++-----------+------------------+
+| city      | No. Of customers |
++-----------+------------------+
+| New Jersy |                1 |
+| New York  |                2 |
+| Toronto   |                3 |
++-----------+------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT city, COUNT(city) "No. Of customers" FROM customer GROUP BY city HAVING COUNT(city) > 2; 
++---------+------------------+
+| city    | No. Of customers |
++---------+------------------+
+| Toronto |                3 |
++---------+------------------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE name REGEXP '^D';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE name REGEXP '^ D';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname REGEXP '^D';
++--------+-------------+----------+--------+---------+------+
+| custID | custName    | nickName | city   | zipcode | age  |
++--------+-------------+----------+--------+---------+------+
+| CO4    | Denial Jack | DJ       | Brazil | 341020  |   27 |
++--------+-------------+----------+--------+---------+------+
+1 row in set (0.08 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname REGEXP '^ D';
++--------+---------------+----------+---------+---------+------+
+| custID | custName      | nickName | city    | zipcode | age  |
++--------+---------------+----------+---------+---------+------+
+| CO5    |  Donna Newman | New      | Toronto | 130120  |   27 |
++--------+---------------+----------+---------+---------+------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname REGEXP 'n$';
++--------+-----------------+----------+----------+---------+------+
+| custID | custName        | nickName | city     | zipcode | age  |
++--------+-----------------+----------+----------+---------+------+
+| CO3    | Cherlies Theron | Cher     | New York | 120134  |   26 |
+| CO5    |  Donna Newman   | New      | Toronto  | 130120  |   27 |
++--------+-----------------+----------+----------+---------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname REGEXP '^..a';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname REGEXP '^..e';
++--------+-----------------+----------+----------+---------+------+
+| custID | custName        | nickName | city     | zipcode | age  |
++--------+-----------------+----------+----------+---------+------+
+| CO3    | Cherlies Theron | Cher     | New York | 120134  |   26 |
++--------+-----------------+----------+----------+---------+------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE postalcode REGEXP '^[0-9]';
+ERROR 1054 (42S22): Unknown column 'postalcode' in 'where clause'
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE zipcode REGEXP '^[0-9]';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE zipcode REGEXP '^[a-z]';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE nickname REGEXP '^A*';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE nickname REGEXP '^A+';
++--------+---------------+----------+------+---------+------+
+| custID | custName      | nickName | city | zipcode | age  |
++--------+---------------+----------+------+---------+------+
+| CO1    | Ashley        | Ash      | WDC  | 321200  |   34 |
+| CO8    | Ashko Charles | AK       | USA  | 421044  |   30 |
++--------+---------------+----------+------+---------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE nickname REGEXP '^A?';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE nickname REGEXP '^.{4';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE nickname REGEXP '^.{4}';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+4 rows in set (0.05 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE city REGEXP '^.{4}';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
++--------+-----------------+----------+-----------+---------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE city rLIKE '^.{4}';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
++--------+-----------------+----------+-----------+---------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE city rLIKE '^..e';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^..e';
++--------+-----------------+----------+----------+---------+------+
+| custID | custName        | nickName | city     | zipcode | age  |
++--------+-----------------+----------+----------+---------+------+
+| CO3    | Cherlies Theron | Cher     | New York | 120134  |   26 |
++--------+-----------------+----------+----------+---------+------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^d$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^l$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^k$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^o$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^n$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^n?';
++--------+-----------------+----------+-----------+---------+------+
+| custID | custName        | nickName | city      | zipcode | age  |
++--------+-----------------+----------+-----------+---------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 |
++--------+-----------------+----------+-----------+---------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^n+';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^a+';
++--------+---------------+----------+------+---------+------+
+| custID | custName      | nickName | city | zipcode | age  |
++--------+---------------+----------+------+---------+------+
+| CO1    | Ashley        | Ash      | WDC  | 321200  |   34 |
+| CO8    | Ashko Charles | AK       | USA  | 421044  |   30 |
++--------+---------------+----------+------+---------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^b+';
++--------+-------------+----------+----------+---------+------+
+| custID | custName    | nickName | city     | zipcode | age  |
++--------+-------------+----------+----------+---------+------+
+| CO2    | Bob Marley  | BM       | Toronto  | 100100  |   25 |
+| CO7    | Bobby Chako | Chac     | New York | 320300  |   29 |
++--------+-------------+----------+----------+---------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^s$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> 
+MariaDB [CSD2204S18]> SELECT * FROM customer WHERE custname rLIKE '^y$';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT CURDATE;
+ERROR 1054 (42S22): Unknown column 'CURDATE' in 'field list'
+MariaDB [CSD2204S18]> SELECT CURDATE();
++------------+
+| CURDATE()  |
++------------+
+| 2018-05-14 |
++------------+
+1 row in set (0.03 sec)
+
+MariaDB [CSD2204S18]> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2018-05-14 09:15:20 |
++---------------------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> ALTER TABLE customer ADD COLUMN dob DATE;
+Query OK, 0 rows affected (0.39 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [CSD2204S18]> DESC customer;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| custID   | varchar(5)  | NO   | PRI | NULL    |       |
+| custName | varchar(50) | YES  |     | NULL    |       |
+| nickName | varchar(10) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| zipcode  | varchar(6)  | YES  |     | NULL    |       |
+| age      | int(3)      | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * FROM customer;
++--------+-----------------+----------+-----------+---------+------+------+
+| custID | custName        | nickName | city      | zipcode | age  | dob  |
++--------+-----------------+----------+-----------+---------+------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 | NULL |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 | NULL |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 | NULL |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 | NULL |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 | NULL |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 | NULL |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 | NULL |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 | NULL |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 | NULL |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 | NULL |
++--------+-----------------+----------+-----------+---------+------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1991-01-10' WHERE custID = 'C01';
+Query OK, 0 rows affected (0.06 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+MariaDB [CSD2204S18]> SELECT * FROM customer;
++--------+-----------------+----------+-----------+---------+------+------+
+| custID | custName        | nickName | city      | zipcode | age  | dob  |
++--------+-----------------+----------+-----------+---------+------+------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 | NULL |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 | NULL |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 | NULL |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 | NULL |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 | NULL |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 | NULL |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 | NULL |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 | NULL |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 | NULL |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 | NULL |
++--------+-----------------+----------+-----------+---------+------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1991-01-10' WHERE custID = 'CO1';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> SELECT * FROM customer;
++--------+-----------------+----------+-----------+---------+------+------------+
+| custID | custName        | nickName | city      | zipcode | age  | dob        |
++--------+-----------------+----------+-----------+---------+------+------------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 | 1991-01-10 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 | NULL       |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 | NULL       |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 | NULL       |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 | NULL       |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 | NULL       |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 | NULL       |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 | NULL       |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 | NULL       |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 | NULL       |
++--------+-----------------+----------+-----------+---------+------+------------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1995-02-13' WHERE custID = 'CO2';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1995-13-26' WHERE custID = 'CO3';
+Query OK, 1 row affected, 1 warning (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1992-10-8' WHERE custID = 'CO4';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1990-1-18' WHERE custID = 'CO5';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1996-05-7' WHERE custID = 'CO6';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1996-06-7' WHERE custID = 'CO7';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1996-07-17' WHERE custID = 'CO8';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1996-07-7' WHERE custID = 'CO9';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1999-07-6' WHERE custID = 'CO10';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> SELECT * FROM
+    -> \g
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [CSD2204S18]> SELECT * FROM Customer;
++--------+-----------------+----------+-----------+---------+------+------------+
+| custID | custName        | nickName | city      | zipcode | age  | dob        |
++--------+-----------------+----------+-----------+---------+------+------------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 | 1991-01-10 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 | 1999-07-06 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 | 1995-02-13 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 | 0000-00-00 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 | 1992-10-08 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 | 1990-01-18 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 | 1996-05-07 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 | 1996-06-07 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 | 1996-07-17 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 | 1996-07-07 |
++--------+-----------------+----------+-----------+---------+------+------------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> UPDATE Customer SET dob = '1999-07-9' WHERE custID = 'CO3';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSD2204S18]> SELECT * FROM Customer;
++--------+-----------------+----------+-----------+---------+------+------------+
+| custID | custName        | nickName | city      | zipcode | age  | dob        |
++--------+-----------------+----------+-----------+---------+------+------------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 | 1991-01-10 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 | 1999-07-06 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 | 1995-02-13 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 | 1999-07-09 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 | 1992-10-08 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 | 1990-01-18 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 | 1996-05-07 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 | 1996-06-07 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 | 1996-07-17 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 | 1996-07-07 |
++--------+-----------------+----------+-----------+---------+------+------------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> UPDATE Customer age WHERE age= CURDATE()-DOB;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE age= CURDATE()-DOB' at line 1
+MariaDB [CSD2204S18]> UPDATE Customer age WHERE age= {CURDATE()-DOB};
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE age= {CURDATE()-DOB}' at line 1
+MariaDB [CSD2204S18]> SELECT DATEDIFF(@dob, GTEDATE());
+ERROR 1305 (42000): FUNCTION csd2204s18.GTEDATE does not exist
+MariaDB [CSD2204S18]> SELECT DATEDIFF(@dob, age())
+    -> \g
+ERROR 1305 (42000): FUNCTION csd2204s18.age does not exist
+MariaDB [CSD2204S18]> SELECT DATEDIFF(@dob, age());
+ERROR 1305 (42000): FUNCTION csd2204s18.age does not exist
+MariaDB [CSD2204S18]> SELECT name, dob, TIMESTAMPDIFF(YEAR, dob, CURATE()) "age" FROM customer;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURATE()) "age" FROM customer;
+ERROR 1305 (42000): FUNCTION csd2204s18.CURATE does not exist
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer;
++-----------------+------------+------+
+| custname        | dob        | age  |
++-----------------+------------+------+
+| Ashley          | 1991-01-10 |   27 |
+| Jack Sp         | 1999-07-06 |   18 |
+| Bob Marley      | 1995-02-13 |   23 |
+| Cherlies Theron | 1999-07-09 |   18 |
+| Denial Jack     | 1992-10-08 |   25 |
+|  Donna Newman   | 1990-01-18 |   28 |
+| Eton M          | 1996-05-07 |   22 |
+| Bobby Chako     | 1996-06-07 |   21 |
+| Ashko Charles   | 1996-07-17 |   21 |
+| Tony Special    | 1996-07-07 |   21 |
++-----------------+------------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(DAY, dob, CURDATE()) "age" FROM customer;
++-----------------+------------+-------+
+| custname        | dob        | age   |
++-----------------+------------+-------+
+| Ashley          | 1991-01-10 |  9986 |
+| Jack Sp         | 1999-07-06 |  6887 |
+| Bob Marley      | 1995-02-13 |  8491 |
+| Cherlies Theron | 1999-07-09 |  6884 |
+| Denial Jack     | 1992-10-08 |  9349 |
+|  Donna Newman   | 1990-01-18 | 10343 |
+| Eton M          | 1996-05-07 |  8042 |
+| Bobby Chako     | 1996-06-07 |  8011 |
+| Ashko Charles   | 1996-07-17 |  7971 |
+| Tony Special    | 1996-07-07 |  7981 |
++-----------------+------------+-------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer;
++-----------------+------------+------+
+| custname        | dob        | age  |
++-----------------+------------+------+
+| Ashley          | 1991-01-10 |   27 |
+| Jack Sp         | 1999-07-06 |   18 |
+| Bob Marley      | 1995-02-13 |   23 |
+| Cherlies Theron | 1999-07-09 |   18 |
+| Denial Jack     | 1992-10-08 |   25 |
+|  Donna Newman   | 1990-01-18 |   28 |
+| Eton M          | 1996-05-07 |   22 |
+| Bobby Chako     | 1996-06-07 |   21 |
+| Ashko Charles   | 1996-07-17 |   21 |
+| Tony Special    | 1996-07-07 |   21 |
++-----------------+------------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE age='22';
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE age=22;
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE age=23;
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE age>23;
++-----------------+------------+------+
+| custname        | dob        | age  |
++-----------------+------------+------+
+| Ashley          | 1991-01-10 |   27 |
+| Jack Sp         | 1999-07-06 |   18 |
+| Bob Marley      | 1995-02-13 |   23 |
+| Cherlies Theron | 1999-07-09 |   18 |
+| Denial Jack     | 1992-10-08 |   25 |
+|  Donna Newman   | 1990-01-18 |   28 |
+| Eton M          | 1996-05-07 |   22 |
+| Bobby Chako     | 1996-06-07 |   21 |
+| Ashko Charles   | 1996-07-17 |   21 |
+| Tony Special    | 1996-07-07 |   21 |
++-----------------+------------+------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE age<23;
+Empty set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE age='22-;
+    '> ,
+    '> ;
+    '> ,
+    '> cd;
+    '> \g
+    '> '
+    -> \g
+Empty set, 1 warning (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer WHERE TIMESTAMPDIFF(YEAR, dob, CURDATE())=22;
++----------+------------+------+
+| custname | dob        | age  |
++----------+------------+------+
+| Eton M   | 1996-05-07 |   22 |
++----------+------------+------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT custname, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) "age" FROM customer HAVING age= 22;
++----------+------------+------+
+| custname | dob        | age  |
++----------+------------+------+
+| Eton M   | 1996-05-07 |   22 |
++----------+------------+------+
+1 row in set (0.00 sec)
+
+MariaDB [CSD2204S18]> SELECT * from customer;
++--------+-----------------+----------+-----------+---------+------+------------+
+| custID | custName        | nickName | city      | zipcode | age  | dob        |
++--------+-----------------+----------+-----------+---------+------+------------+
+| CO1    | Ashley          | Ash      | WDC       | 321200  |   34 | 1991-01-10 |
+| CO10   | Jack Sp         | Sparrow  | New Jersy | 102301  |   32 | 1999-07-06 |
+| CO2    | Bob Marley      | BM       | Toronto   | 100100  |   25 | 1995-02-13 |
+| CO3    | Cherlies Theron | Cher     | New York  | 120134  |   26 | 1999-07-09 |
+| CO4    | Denial Jack     | DJ       | Brazil    | 341020  |   27 | 1992-10-08 |
+| CO5    |  Donna Newman   | New      | Toronto   | 130120  |   27 | 1990-01-18 |
+| CO6    | Eton M          | M.       | Toronto   | 201023  |   28 | 1996-05-07 |
+| CO7    | Bobby Chako     | Chac     | New York  | 320300  |   29 | 1996-06-07 |
+| CO8    | Ashko Charles   | AK       | USA       | 421044  |   30 | 1996-07-17 |
+| CO9    | Tony Special    | Specie   | GTA       | 418921  |   31 | 1996-07-07 |
++--------+-----------------+----------+-----------+---------+------+------------+
+10 rows in set (0.00 sec)
+
+MariaDB [CSD2204S18]> exit
